@@ -1,7 +1,11 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect,useState } from 'react'
 import './listePatient.css'
 
 const ListePatient = () => {
+
+
+    // const [patient,setPatient] = useState([])
 
     const patient = [{
         firstname:"Charlotte",
@@ -18,6 +22,10 @@ const ListePatient = () => {
         firstname:"Loïc",
         lastname:"Labaisse"
     }]
+
+    // useEffect(()=> {
+    //         axios.get("http://localhost:4100/medecin/:idmedecin/patient").then(response => response.data).then(response=> setPatient(response)).catch(err=> console.log(err))
+    // },[])
   return (
     <div className='listepatient'>
         <div className="listepatient_content">
