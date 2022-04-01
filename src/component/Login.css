@@ -1,0 +1,35 @@
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background: white;
+  width: 50%;
+  height: 500px;
+  border-radius: 5px;
+}
+.login_title {
+  text-align: center;
+}
+.login_form {
+  display: flex;
+  flex-direction: column;
+  height: 60%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inputform {
+  width: 70%;
+  height: 30px;
+}
+.buttonform {
+  height: 30px;
+  width: 35%;
+  font-size: 16px;
+}

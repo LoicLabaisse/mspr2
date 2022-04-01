@@ -1,0 +1,32 @@
+.listepatient{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.listepatient_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background: white;
+    width: 50%;
+    height: 500px;
+    border-radius: 5px;
+   overflow-y: scroll;
+  }
+  .listepatient_title{
+      text-align: center;
+  }
+.listepatient_list{
+    list-style: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.listepatient_listitem{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
