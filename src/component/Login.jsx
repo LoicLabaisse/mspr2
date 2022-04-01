@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 
 const Login = () => {
@@ -15,9 +15,13 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:4200/medecin/login", login);
+    axios.post("http://83.195.132.70:4200/medecin/login", login);
     console.log(login);
   };
+
+  useEffect(()=> {
+      axios.get("http://83.195.132.70:4200/medecin/login").then(response=>console.log(response.data))
+  },[])
 
   console.log(login);
   return (

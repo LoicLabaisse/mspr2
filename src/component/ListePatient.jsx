@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect,useState } from 'react'
+import {useParams} from 'react-router-dom'
 import './listePatient.css'
 
 const ListePatient = () => {
@@ -24,7 +25,7 @@ const ListePatient = () => {
     }]
 
     // useEffect(()=> {
-    //         axios.get("http://localhost:4100/medecin/:idmedecin/patient").then(response => response.data).then(response=> setPatient(response)).catch(err=> console.log(err))
+    //         axios.get(`http://localhost:4100/medecin/${id}/patient`).then(response => response.data).then(response=> setPatient(response)).catch(err=> console.log(err))
     // },[])
   return (
     <div className='listepatient'>
