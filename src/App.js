@@ -1,7 +1,8 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './component/Login';
-import ListePatient from './component/ListePatient';
+import Login from './assets/component/Login';
+import ListePatient from './assets/component/ListePatient';
+
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Login.css";
+import { Link } from "react-router-dom";
+import "../css/Login.css"
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -12,16 +13,14 @@ const Login = () => {
     setLogin({ ...login, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  
+    const handleLogin = (e) => {
 
-    axios.post("http://83.195.132.70:4200/medecin/login", login);
-    console.log(login);
-  };
+      axios.post("http://localhost:4200/medecin/login", login);
+      console.log(login);
+    };
 
-  useEffect(()=> {
-      axios.get("http://83.195.132.70:4200/medecin/login").then(response=>console.log(response.data))
-  },[])
+  
 
   console.log(login);
   return (
@@ -43,12 +42,11 @@ const Login = () => {
             name="password"
             className="inputform"
           />
-          <input
-            type="submit"
-            onClick={handleLogin}
-            value="Connexion"
-            className="buttonform"
-          />
+           <Link  to="/listepatient">
+            <button className="buttonform" type="submit" onClick={handleLogin} value="Connexion">
+              Connexion
+            </button>
+          </Link>
         </form>
       </div>
     </div>
