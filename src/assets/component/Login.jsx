@@ -1,13 +1,17 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState,  } from "react";
+import { Link  } from "react-router-dom";
+import { useNavigate } from "react-router";
 import "../css/Login.css"
+import ListePatient from "./ListePatient";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [login, setLogin] = useState({
     email: null,
     password: null,
   });
+  const [data,setData] = useState([])
 
   const handleChangeLogin = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -15,9 +19,18 @@ const Login = () => {
 
   
     const handleLogin = (e) => {
-
-      axios.post("http://localhost:4200/medecin/login", login);
-      console.log(login);
+      e.preventDefault()
+      axios.post("http://localhost:4200/medecin/login", login).then(res => {
+        if( res.status === 200 || res.status === 202) {
+          console.log("is connected")
+         setData(res.data)
+          navigate("/listepatient",{state :res.data})
+         
+        }else {
+          console.log(" not connected")
+        }
+      } 
+      ) 
     };
 
   
@@ -26,7 +39,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="login_content">
-        <h1 className="login_title">Connexion</h1>
+        <h1 className="login_title">Clinique Le Châtelet</h1>
         <form className="login_form">
           <label className="labelform">Email</label>
           <input
@@ -42,11 +55,10 @@ const Login = () => {
             name="password"
             className="inputform"
           />
-           <Link  to="/listepatient">
-            <button className="buttonform" type="submit" onClick={handleLogin} value="Connexion">
+            <button className="buttonform" onClick={handleLogin} value="Connexion">
               Connexion
             </button>
-          </Link>
+        
         </form>
       </div>
     </div>

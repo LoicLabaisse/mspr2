@@ -15,9 +15,9 @@ const Modal = (props) => {
 
         <div className="modal_global_input">
           <label>Nom de famille :</label>
-        <input className='modal_input' name="lastname" onChange={props.handleChange} required />
+        <input className='modal_input' name="last_name" onChange={props.handleChange} required />
         <label>Prénom :</label>
-        <input className='modal_input' name="firstname" onChange={props.handleChange} required />
+        <input className='modal_input' name="first_name" onChange={props.handleChange} required />
         </div>
 
         <button className='modal_button' onClick={props.addPatient}>Ajouter Patient</button>
