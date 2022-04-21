@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from "react";
 import "../css/listePatient.css";
 import Modal from "./Modal";
-import * as AiIcons from 'react-icons/ai'
+import * as AiIcons from "react-icons/ai";
 import axios from "axios";
 import { useLocation } from "react-router";
 
-
 const ListePatient = () => {
+  const { state } = useLocation();
+  console.log(state.id);
   const [change, setChange] = useState({
+    id_medecin: state.id,
     first_name: null,
     last_name: null,
   });
 
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [patient, setPatient] = useState([]);
 
-  const {state} = useLocation()
-  console.log(state.id);
+  useEffect(() => {
 
-  useEffect(()=> {
-   
-        axios.get(`${process.env.REACT_APP_API}/${state.id}/listePatient`).then(res => setPatient(res.data))
-  },[state.id])
-
-  const [patient,setPatient] = useState([])
+    async function callData() {
+      await axios
+      .get(`${process.env.REACT_APP_API}/${state.id}/listePatient`)
+      .then((res) => setPatient(res.data));
+    }
+    setPatient(patient)
+    callData()
+    
+  }, []);
 
 
   const handleChange = (e) => {
@@ -31,23 +36,20 @@ const ListePatient = () => {
   };
 
   const AddPatient = (e) => {
-
-    
+    e.preventDefault();
     let copy = [...patient, change];
     setPatient(copy);
-    setShow(!show)
     
-  };
-
-  const removePatient = (e) => {
-    const name = e.target.getAttribute("last_name");
-    setPatient(...patient.filter(i => i.last_name !== name ));
-    console.log("ok");
+    axios
+      .post(`${process.env.REACT_APP_API}/patients/create`, change)
+      .then((res) => console.log(res.data));
+    setShow(!show);
   };
 
   const showModal = () => {
-      setShow(!show)
-  }
+    setShow(!show);
+  };
+  console.log(state);
 
   return (
     <div className="listepatient">
@@ -58,22 +60,29 @@ const ListePatient = () => {
         <ul className="listepatient_list">
           {patient &&
             patient.map((p) => (
-              <li key={p.first_name} className="listepatient_listitem">
+              <li key={p.id} className="listepatient_listitem">
                 <p>{p.first_name}</p>
                 <p>
                   <b>{p.last_name.toUpperCase()}</b>
                 </p>
-                <AiIcons.AiFillCloseSquare className="listepatient_delete" name={p.firstname} onClick={removePatient}/>
-               
               </li>
             ))}
         </ul>
 
-        
-        <button className="listepatient_button" onClick={showModal}>Ajouter un patient</button>
-        {
-            show ? <Modal show={show} addPatient={AddPatient} handleChange={handleChange} setShow={setShow} onClose={()=> setShow(!show)}/> : ""
-        }
+        <button className="listepatient_button" onClick={showModal}>
+          Ajouter un patient
+        </button>
+        {show ? (
+          <Modal
+            show={show}
+            addPatient={AddPatient}
+            handleChange={handleChange}
+            setShow={setShow}
+            onClose={() => setShow(!show)}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
