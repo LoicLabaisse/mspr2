@@ -18,7 +18,7 @@ const Login = () => {
   
     const handleLogin = (e) => {
       e.preventDefault()
-      axios.post(`${process.env.REACT_API}/medecin/login`, login).then(res => {
+      axios.post(`${process.env.REACT_APP_API}/medecin/login`, login).then(res => {
         if( res.status === 200 || res.status === 202) {
           console.log("is connected")
          setData(res.data)

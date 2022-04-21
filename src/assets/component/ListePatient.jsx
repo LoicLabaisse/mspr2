@@ -19,7 +19,7 @@ const ListePatient = () => {
 
   useEffect(()=> {
    
-        axios.get(`${process.env.REACT_API}/${state.id}/listePatient`).then(res => setPatient(res.data))
+        axios.get(`${process.env.REACT_APP_API}/${state.id}/listePatient`).then(res => setPatient(res.data))
   },[state.id])
 
   const [patient,setPatient] = useState([])
