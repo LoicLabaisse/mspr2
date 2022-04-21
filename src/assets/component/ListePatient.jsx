@@ -24,7 +24,6 @@ const ListePatient = () => {
 
   const [patient,setPatient] = useState([])
 
-  const [updateList, setUpdateList] = useState(patient);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,7 +48,6 @@ const ListePatient = () => {
   const showModal = () => {
       setShow(!show)
   }
-  console.log()
 
   return (
     <div className="listepatient">

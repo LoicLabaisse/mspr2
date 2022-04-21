@@ -49,3 +49,10 @@
 .buttonform:hover{
   background-color:#70e2e6 ;
 }
+.active{
+  display: block;
+  color: red;
+}
+.disabled{
+  display: none;
+}
