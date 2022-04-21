@@ -3,6 +3,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url(https://burst.shopifycdn.com/photos/doctors-office-flatlay.jpg?width=925&format=pjpg&exif=1&iptc=1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: cover;
 }
 
 .listepatient_content {
@@ -39,8 +45,31 @@
     border: none;
     color: white;
     border-radius: 5px;
-    height: 30px;
     width: 40%;
+    padding: 10px;
     font-size: 18px;
     margin: auto;
+    justify-content: center;
+
 }
+.listepatient_list .listepatient_listitem {
+    background-color: #5f9ea04a;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 150px;
+    display: block;
+    margin: 2px;
+  }
+  
+  .listepatient_list .listepatient_listitem:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+  }
+  
+  .listepatient_list .listepatient_listitem:hover {
+    background-color: #11212282;
+  }
