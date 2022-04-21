@@ -3,39 +3,26 @@ import "../css/listePatient.css";
 import Modal from "./Modal";
 import * as AiIcons from 'react-icons/ai'
 import axios from "axios";
+import { useLocation } from "react-router";
 
 
 const ListePatient = () => {
   const [change, setChange] = useState({
-    firstname: null,
-    lastname: null,
+    first_name: null,
+    last_name: null,
   });
 
   const [show,setShow] = useState(false)
 
+  const {state} = useLocation()
+  console.log(state.id);
 
-//   useEffect(()=> {
-//         axios.get(`${process.env.REACT_API}/${medecin.id}/listepatient`).then(res => console.log(res.data))
-//   },[])
+  useEffect(()=> {
+   
+        axios.get(`http://localhost:4200/${state.id}/listePatient`).then(res => setPatient(res.data))
+  },[state.id])
 
-  const patient = [
-    {
-      firstname: "Charlotte",
-      lastname: "Menière",
-    },
-    {
-      firstname: "Titouan",
-      lastname: "Escorneboueu",
-    },
-    {
-      firstname: "François",
-      lastname: "Saura",
-    },
-    {
-      firstname: "Loïc",
-      lastname: "Labaisse",
-    },
-  ];
+  const [patient,setPatient] = useState([])
 
   const [updateList, setUpdateList] = useState(patient);
 
@@ -46,35 +33,37 @@ const ListePatient = () => {
 
   const AddPatient = (e) => {
 
-    let copy = [...patient];
-    copy = [...copy, change];
-    setUpdateList(copy);
+    
+    let copy = [...patient, change];
+    setPatient(copy);
     setShow(!show)
     
   };
 
   const removePatient = (e) => {
-    const name = e.target.getAttribute("firstname");
-    setUpdateList(patient.filter((item) => item.firstname !== name));
+    const name = e.target.getAttribute("last_name");
+    setPatient(...patient.filter(i => i.last_name !== name ));
     console.log("ok");
   };
 
   const showModal = () => {
       setShow(!show)
   }
+  console.log()
 
   return (
     <div className="listepatient">
       <div className="listepatient_content">
+        <h1>Bonjour Mr {state.last_name}</h1>
         <h1 className="listepatient_title">Liste de vos patient</h1>
 
         <ul className="listepatient_list">
-          {updateList &&
-            updateList.map((p) => (
-              <li className="listepatient_listitem">
-                <p>{p.firstname}</p>
+          {patient &&
+            patient.map((p) => (
+              <li key={p.first_name} className="listepatient_listitem">
+                <p>{p.first_name}</p>
                 <p>
-                  <b>{p.lastname.toUpperCase()}</b>
+                  <b>{p.last_name.toUpperCase()}</b>
                 </p>
                 <AiIcons.AiFillCloseSquare className="listepatient_delete" name={p.firstname} onClick={removePatient}/>
                
